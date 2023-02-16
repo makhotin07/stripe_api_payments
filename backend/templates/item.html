@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Shop{% endblock %}
+{% block content %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Наименование</th>
+        <th scope="col">Описание</th>
+        <th scope="col">Стоимость</th>
+        <th scope="col">Buy</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.price }}</td>
+        <td> <button id="buy-button">Buy</button></td>
+
+
+    </tr>
+    </tbody>
+</table>
+
+    <script type="text/javascript">
+
+      var stripe = Stripe('{{ stripe_public_key }}');
+
+      var buyButton = document.getElementById('buy-button');
+
+      buyButton.addEventListener("click", function () {
+      fetch("{% url 'buy' item.id %}", {
+        method: "Get",
+
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (session) {
+          return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(function (result) {
+
+          if (result.error) {
+            alert(result.error.message);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+    });
+
+    </script>
+
+
+{% endblock content %}
