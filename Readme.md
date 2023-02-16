@@ -8,6 +8,14 @@
 
     $ cd infra
 
+Вам нужно самостоятельно в папке infra создать файл .env
+по примеру EXAMPLE.env, при необходимости сгенерировать новый SECRET_KEY django,
+указать Stripe Public и Secret ключи из личного аккаута: https://dashboard.stripe.com/test/dashboard
+
+
+
+
+
     $ docker-compose up
 
 
@@ -28,5 +36,4 @@
 <br>
 
         admin:admin
-
 
