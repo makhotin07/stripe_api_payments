@@ -73,4 +73,4 @@ STRIPE_SECRET_KEY=<Ваш Secret key с сайта stripe.com>
 
 
 #### Автор:
-Стацюк Виталий - [https://github.com/makhotin07](https://github.com/makhotin07)
+Никита Махотин - [https://github.com/makhotin07](https://github.com/makhotin07)
