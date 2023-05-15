@@ -1,39 +1,76 @@
-# Проект с оплатой 
+# Тестовое задание Django + Stripe API 
 
-### Django + Postgres + Docker + Stripe
+### Используемые технологии
+- Django
+- Django Rest Framework
+- Docker
+- Docker-compose
+- Stripe
 
-## Клонировать проект
+### Подготовка
+**Обязательно** - регистрация на сайте - [https://stripe.com](https://stripe.com)  
+- Клонировать проект с помощью git clone или скачать ZIP-архив:  
+``` git clone <название репозитория> ```
+- Перейти в папку TaskStrip и создать файл .env со следущим содержимым:
+```
+SECRET_KEY=<любой набор символов>
+STRIPE_PUBLIC_KEY=<Ваш Publishable key с сайта stripe.com>
+STRIPE_SECRET_KEY=<Ваш Secret key с сайта stripe.com>
+```
+Для получения Publishable key и Secret key зайдите на сайт stripe.com и авторизуетесь.
+В верхнем правом углу нажмите *Developers*, затем слева нажмите *API keys*.
 
-    $ cd project_stripe_docker
+### Запуск проекта если установлен Docker  
+- Запустите docker-compose:   
+``` docker compose up ```  
+- Не закрывая первую консоль, открыть вторую и в ней выполнить:
+  - Создайте миграции:    
+  ``` docker-compose exec web python manage.py makemigrations ```
+  - Примените миграции   
+  ``` docker-compose exec web python manage.py migrate ```
+  - Загрузить подготовленный список предметов  
+  ``` docker-compose exec web python manage.py loaddata items.json ```
 
-    $ cd infra
+### Запуск проекта если Docker не установлен
+- Установите виртуальное окружение:  
+``` python -m venv venv ```  
+- Активируйте виртуальное окружение:     
+``` source venv/Scripts/activate ``` 
+- Установите зависимости из файла requirements.txt:   
+``` pip install -r requirements.txt ```
+- Создайте миграции:    
+``` python manage.py makemigrations ```
+- Примените миграции:   
+``` python manage.py migrate ```
+- Загрузите тестовые данные:  
+``` python manage.py loaddata items.json ```
+- Выполните команду:   
+``` python manage.py runserver ``` 
 
-Вам нужно самостоятельно в папке infra создать файл .env
-по примеру EXAMPLE.env, при необходимости сгенерировать новый SECRET_KEY django,
-указать Stripe Public и Secret ключи из личного аккаута: https://dashboard.stripe.com/test/dashboard
+#### Доступ в админку
+- Если вы загрузили тестовые данные:
+  - Перейдите по адресу:        
+    ``` GET /admin/ ``` 
+  - Логин и пароль - admin
+- Если не загружали тестовые данные:
+  - Создаете суперпользователя Django:  
+    - если установлен Docker  
+    ``` docker-compose exec web python manage.py createsuperuser ```
+    - если Docker не установлен  
+    ``` python manage.py createsuperuser ```
+
+#### Примеры некоторых запросов API:
+Получение Stripe Session Id:  
+``` GET /buy/1/ ```  
+Получение данных своей учетной записи:  
+``` GET /item/3/ ```  
+
+Форму для отправки тестового платежа можно заполнять любыми данными, кроме номера карты.
+Используйте следующие номера карт для тестирования:
+- 4242 4242 4242 4242
+- 4000 0000 0000 3220
+- 4000 0000 0000 9995
 
 
-
-
-
-    $ docker-compose up
-
-
-* Миграции происходят автоматически 
-* Товары добавляются автоматически 
-* SuperUser создается автоматически
-* Карта для тест оплаты 
-
-    
-    $ 4242 4242 4242 4242 
-    10/32 
-    789
-
-<br>
-сайт доступен по ссылке http://127.0.0.1:8000/
-
-Чтобы просмотреть Админ Панель логин:пароль
-<br>
-
-        admin:admin
-
+#### Автор:
+Стацюк Виталий - [https://github.com/makhotin07](https://github.com/makhotin07)
