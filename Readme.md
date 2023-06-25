@@ -9,7 +9,6 @@
     <img src="https://img.shields.io/badge/Stripe-API-orange" alt="Stripe API"/>
 </p>
 
-[Django](https://github.com/devicons/devicon/blob/master/icons/django/django-original.svg)
 
 
 
