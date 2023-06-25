@@ -9,9 +9,10 @@
     <img src="https://img.shields.io/badge/Stripe-API-orange" alt="Stripe API"/>
 </p>
 
-<div align="center">
-  <img src="https://github.com/devicons/devicon/blob/master/icons/django/django-original.svg" alt="Django" width="100" height="100"/>
-</div>
+<p align="center">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/django/django-original.svg" alt="Django" width="100" height="100"/>
+</p>
+
 
 ## Описание
 
